@@ -47,7 +47,7 @@ useEffect(() => {
           flexWrap:'wrap'
         }}
       >
-        {weatherInfo.slice(4).map((cardInfo) => <><WeatherCard data={cardInfo}/></> )}
+        {weatherInfo.map((cardInfo) => <><WeatherCard data={cardInfo}/></> )}
       </div>
     </div>
   );
