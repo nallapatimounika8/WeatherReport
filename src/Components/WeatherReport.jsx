@@ -1,19 +1,17 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import WeatherCard from "./WeatherCard";
-import { fetchData } from "../features/counter/counterSlice";
+import { fetchData } from "../features/weather/weatherSlice";
 
 function WeatherReport() {
 
-const dispatch = useDispatch()    
+const dispatch = useDispatch()  
 
-const [weatherInfo, setWeatherInfo] = useState([])
+const weatherInfo = useSelector(state => state.weather.data)
 
 function fetchApi() {
     axios.get('http://api.weatherapi.com/v1/forecast.json?key=c3db1b206f9948f08e184558220912&q=London&days=1&aqi=no&alerts=no').then((response) => {
-        console.log(response.data.forecast.forecastday[0].hour)
-        setWeatherInfo(response.data.forecast.forecastday[0].hour)
         dispatch(fetchData(response.data.forecast.forecastday[0].hour))
     })
 }
